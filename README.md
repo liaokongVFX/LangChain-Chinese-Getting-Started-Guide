@@ -1,6 +1,6 @@
 # LangChain 的中文入门教程
 
-> 为了便于阅读，已生成gitbook：https://le-kongsorganization.gitbook.io/llm-kai-fa-jiao-cheng/
+> 为了便于阅读，已生成gitbook：https://liaokong.gitbook.io/llm-kai-fa-jiao-cheng/
 
 
 
