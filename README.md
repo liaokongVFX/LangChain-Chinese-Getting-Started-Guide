@@ -1,5 +1,9 @@
 # LangChain 的中文入门教程
 
+> 为了便于阅读，已生成gitbook：https://le-kongsorganization.gitbook.io/llm-kai-fa-jiao-cheng/
+
+
+
 ### 介绍
 
 众所周知 OpenAI 的 API 无法联网的，所以如果只使用自己的功能实现联网搜索并给出回答、总结 PDF 文档、基于某个 Youtube 视频进行问答等等的功能肯定是无法实现的。所以，我们来介绍一个非常强大的第三方开源库：`LangChain` 。
