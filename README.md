@@ -213,7 +213,7 @@ agent.run("What's the date today? What great events have taken place today in hi
 
 > reAct 介绍可以看这个：https://arxiv.org/pdf/2210.03629.pdf
 >
-> LLM 的 ReAct 模式的 Python 实现: https://skybox.blockadelabs.com/
+> LLM 的 ReAct 模式的 Python 实现: https://til.simonwillison.net/llms/python-react-pattern
 >
 > agent type 官方解释：
 >
