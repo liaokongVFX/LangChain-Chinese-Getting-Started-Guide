@@ -1,4 +1,4 @@
-# LangChain 的中文入门教程
+# LangChain 中文入门教程
 
 > 为了便于阅读，已生成gitbook：https://liaokong.gitbook.io/llm-kai-fa-jiao-cheng/
 
@@ -844,6 +844,46 @@ print(llm_chain.run(question))
 * 训练模型
 * 可以使用本地的 GPU
 * 有些模型无法在 HuggingFace 运行
+
+
+
+**通过自然语言生成执行SQL命令**
+
+我们通过 `SQLDatabaseToolkit` 或者 `SQLDatabaseChain` 都可以实现执行SQL命令的操作
+
+```python
+from langchain.agents import create_sql_agent
+from langchain.agents.agent_toolkits import SQLDatabaseToolkit
+from langchain.sql_database import SQLDatabase
+from langchain.llms.openai import OpenAI
+
+db = SQLDatabase.from_uri("sqlite:///../notebooks/Chinook.db")
+toolkit = SQLDatabaseToolkit(db=db)
+
+agent_executor = create_sql_agent(
+    llm=OpenAI(temperature=0),
+    toolkit=toolkit,
+    verbose=True
+)
+
+agent_executor.run("Describe the playlisttrack table")
+```
+
+```python
+from langchain import OpenAI, SQLDatabase, SQLDatabaseChain
+
+db = SQLDatabase.from_uri("mysql+pymysql://root:root@127.0.0.1/chinook")
+llm = OpenAI(temperature=0)
+
+db_chain = SQLDatabaseChain(llm=llm, database=db, verbose=True)
+db_chain.run("How many employees are there?")
+```
+
+这里可以参考这两篇文档：
+
+[https://python.langchain.com/en/latest/modules/agents/toolkits/examples/sql\_database.html](https://python.langchain.com/en/latest/modules/agents/toolkits/examples/sql\_database.html)
+
+[https://python.langchain.com/en/latest/modules/chains/examples/sqlite.html](https://python.langchain.com/en/latest/modules/chains/examples/sqlite.html)
 
 
 
