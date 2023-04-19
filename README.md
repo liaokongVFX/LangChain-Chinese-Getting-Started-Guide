@@ -847,7 +847,7 @@ print(llm_chain.run(question))
 
 
 
-**通过自然语言生成执行SQL命令**
+**通过自然语言执行SQL命令**
 
 我们通过 `SQLDatabaseToolkit` 或者 `SQLDatabaseChain` 都可以实现执行SQL命令的操作
 
