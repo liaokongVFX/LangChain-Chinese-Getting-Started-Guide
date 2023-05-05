@@ -184,7 +184,7 @@ llm = OpenAI(temperature=0,max_tokens=2048)
 tools = load_tools(["serpapi"])
 
 # 如果搜索完想在计算一下可以这么写
-# tools = load_tools(['serpapi', 'llm-math'])
+# tools = load_tools(['serpapi', 'llm-math'], llm=llm)
 
 # 如果搜索完想再让他再用python的print做点简单的计算，可以这样写
 # tools=load_tools(["serpapi","python_repl"])
