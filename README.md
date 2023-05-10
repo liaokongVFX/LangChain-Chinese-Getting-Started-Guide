@@ -729,8 +729,10 @@ inputs = {
 }
 
 response = chain(inputs)
-print(response['output'])python
+print(response['output'])
 ```
+我们可以看到，他很好的将格式化后的结果输出了出来
+![image-20230510234934.png](doc/image-20230510234934.png)
 
 #### **自定义agent中所使用的工具**
 
