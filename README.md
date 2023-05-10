@@ -151,8 +151,6 @@ llm("怎么评价人工智能")
 
 这时，我们就可以看到他给我们的返回结果了，怎么样，是不是很简单。
 
-
-
 #### 通过 Google 搜索并返回答案
 
 接下来，我们就来搞点有意思的。我们来让我们的 OpenAI api 联网搜索，并返回答案给我们。
@@ -229,8 +227,6 @@ agent.run("What's the date today? What great events have taken place today in hi
 
 > Chatgpt 只能给官方赚钱，而 Openai API 能给我赚钱
 
-
-
 #### 对超长文本进行总结
 
 假如我们想要用 openai api 对一个段文本进行总结，我们通常的做法就是直接发给 api 让他总结。但是如果文本超过了 api 最大的 token 限制就会报错。
@@ -283,8 +279,6 @@ chain.run(split_documents[:5])
 
 这里有几个参数需要注意：
 
-
-
 **文本分割器的 `chunk_overlap` 参数**
 
 这个是指切割后的每个 document 里包含几个上一个 document 结尾的内容，主要作用是为了增加每个 document 的上下文关联。比如，`chunk_overlap=0`时， 第一个 document 为 aaaaaa，第二个为 bbbbbb；当 `chunk_overlap=2` 时，第一个 document 为 aaaaaa，第二个为 aabbbbbb。
@@ -292,8 +286,6 @@ chain.run(split_documents[:5])
 不过，这个也不是绝对的，要看所使用的那个文本分割模型内部的具体算法。
 
 > 文本分割器可以参考这个文档：https://python.langchain.com/en/latest/modules/indexes/text\_splitters.html
-
-
 
 **chain 的 `chain_type` 参数**
 
@@ -305,17 +297,11 @@ chain.run(split_documents[:5])
 
 ![image-20230405165752743](doc/image-20230405165752743.png)
 
-
-
 `refine`: 这种方式会先总结第一个 document，然后在将第一个 document 总结出的内容和第二个 document 一起发给 llm 模型在进行总结，以此类推。这种方式的好处就是在总结后一个 document 的时候，会带着前一个的 document 进行总结，给需要总结的 document 添加了上下文，增加了总结内容的连贯性。
 
 ![image-20230405170617383](doc/image-20230405170617383.png)
 
-
-
 `map_rerank`: 这种一般不会用在总结的 chain 上，而是会用在问答的 chain 上，他其实是一种搜索答案的匹配方式。首先你要给出一个问题，他会根据问题给每个 document 计算一个这个 document 能回答这个问题的概率分数，然后找到分数最高的那个 document ，在通过把这个 document 转化为问题的 prompt 的一部分（问题+document）发送给 llm 模型，最后 llm 模型返回具体答案。
-
-
 
 #### 构建本地知识库问答机器人
 
@@ -359,8 +345,6 @@ print(result)
 
 > 关于 Openai embeddings 详细资料可以参看这个连接: https://platform.openai.com/docs/guides/embeddings
 
-
-
 #### 构建向量索引数据库
 
 我们上个案例里面有一步是将 document 信息转换成向量信息和embeddings的信息并临时存入 Chroma 数据库。
@@ -370,8 +354,6 @@ print(result)
 那么，这个案例我们就来通过 Chroma 和 Pinecone 这两个数据库来讲一下如何做向量数据持久化。
 
 > 因为 LangChain 支持的数据库有很多，所以这里就介绍两个用的比较多的，更多的可以参看文档:https://python.langchain.com/en/latest/modules/indexes/vectorstores/getting\_started.html
-
-
 
 **Chroma**
 
@@ -388,8 +370,6 @@ docsearch.persist()
 docsearch = Chroma(persist_directory="D:/vector_store", embedding_function=embeddings)
 
 ```
-
-
 
 **Pinecone**
 
@@ -418,8 +398,6 @@ docsearch = Pinecone.from_texts([t.page_content for t in split_docs], embeddings
 # 加载数据
 docsearch = Pinecone.from_existing_index(index_name, embeddings)
 ```
-
-
 
 一个简单从数据库获取 embeddings，并回答的代码如下
 
@@ -465,8 +443,6 @@ chain.run(input_documents=docs, question=query)
 ```
 
 ![image-20230407001803057](doc/image-20230407001803057.png)
-
-
 
 #### 使用GPT3.5模型构建油管频道问答机器人
 
@@ -556,8 +532,6 @@ chat = ChatOpenAI(streaming=True, callback_manager=CallbackManager([StreamingStd
 resp = chat(chat_prompt_with_values.to_messages())
 ```
 
-
-
 #### 用 OpenAI 连接万种工具
 
 我们主要是结合使用 `zapier` 来实现将万种工具连接起来。
@@ -616,8 +590,6 @@ agent.run('请用中文总结最后一封"******@qq.com"发给我的邮件。并
 
 这只是个小例子，因为 `zapier` 有数以千计的应用，所以我们可以轻松结合 openai api 搭建自己的工作流。
 
-
-
 #### 一些有意思的小Tip
 
 **执行多个chain**
@@ -657,8 +629,6 @@ review = overall_chain.run("Rome")
 ```
 
 ![image-20230406000133339](doc/image-20230406000133339.png)
-
-
 
 **结构化输出**
 
@@ -715,9 +685,54 @@ output_parser.parse(llm_output)
 
 ![image-20230406000017276](doc/image-20230406000017276.png)
 
+#### **爬取网页并输出JSON数据**
 
+有些时候我们需要爬取一些结构性比较强的网页，并且需要将网页中的信息以JSON的方式返回回来。
 
-**自定义agent中所使用的工具**
+我们就可以使用 `LLMRequestsChain` 类去实现，具体可以参考下面代码
+
+> 为了方便理解，我在例子中直接使用了Prompt的方法去格式化输出结果，而没用使用上个案例中用到的 `StructuredOutputParser`去格式化，也算是提供了另外一种格式化的思路
+
+```python
+from langchain.prompts import PromptTemplate
+from langchain.llms import OpenAI
+from langchain.chains import LLMRequestsChain, LLMChain
+
+llm = OpenAI(model_name="gpt-3.5-turbo", temperature=0)
+
+template = """在 >>> 和 <<< 之间是网页的返回的HTML内容。
+网页是新浪财经A股上市公司的公司简介。
+请抽取参数请求的信息。
+
+>>> {requests_result} <<<
+请使用如下的JSON格式返回数据
+{{
+  "company_name":"a",
+  "company_english_name":"b",
+  "issue_price":"c",
+  "date_of_establishment":"d",
+  "registered_capital":"e",
+  "office_address":"f",
+  "Company_profile":"g"
+
+}}
+Extracted:"""
+
+prompt = PromptTemplate(
+    input_variables=["requests_result"],
+    template=template
+)
+
+chain = LLMRequestsChain(llm_chain=LLMChain(llm=llm, prompt=prompt))
+inputs = {
+  "url": "https://vip.stock.finance.sina.com.cn/corp/go.php/vCI_CorpInfo/stockid/600519.phtml"
+}
+
+response = chain(inputs)
+print(response['output'])python
+```
+
+#### **自定义agent中所使用的工具**
 
 ```python
 from langchain.agents import initialize_agent, Tool
@@ -760,8 +775,6 @@ agent.run("Who is Leo DiCaprio's girlfriend? What is her current age raised to t
 
 比如 Calculator 在描述里面写到，如果你问关于数学的问题就用他这个工具。我们就可以在上面的执行过程中看到，他在我们请求的 prompt 中数学的部分，就选用了Calculator 这个工具进行计算。
 
-
-
 **使用Memory实现一个带记忆的对话机器人**
 
 上一个例子我们使用的是通过自定义一个列表来存储对话的方式来保存历史的。
@@ -786,9 +799,7 @@ ai_response = chat(history.messages)
 print(ai_response)
 ```
 
-
-
-**使用 HuggingFace 模型**
+#### **使用 HuggingFace 模型**
 
 使用 HuggingFace 模型之前，需要先设置环境变量
 
@@ -845,9 +856,7 @@ print(llm_chain.run(question))
 * 可以使用本地的 GPU
 * 有些模型无法在 HuggingFace 运行
 
-
-
-**通过自然语言执行SQL命令**
+#### **通过自然语言执行SQL命令**
 
 我们通过 `SQLDatabaseToolkit` 或者 `SQLDatabaseChain` 都可以实现执行SQL命令的操作
 
@@ -884,8 +893,6 @@ db_chain.run("How many employees are there?")
 [https://python.langchain.com/en/latest/modules/agents/toolkits/examples/sql\_database.html](https://python.langchain.com/en/latest/modules/agents/toolkits/examples/sql\_database.html)
 
 [https://python.langchain.com/en/latest/modules/chains/examples/sqlite.html](https://python.langchain.com/en/latest/modules/chains/examples/sqlite.html)
-
-
 
 ### 总结
 
