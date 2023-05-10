@@ -691,7 +691,7 @@ output_parser.parse(llm_output)
 
 ### **爬取网页并输出JSON数据**
 
-有些时候我们需要爬取一些结构性比较强的网页，并且需要将网页中的信息以JSON的方式返回回来。
+有些时候我们需要爬取一些<mark style="color:red;">**结构性比较强**</mark>的网页，并且需要将网页中的信息以JSON的方式返回回来。
 
 我们就可以使用 `LLMRequestsChain` 类去实现，具体可以参考下面代码
 
