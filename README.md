@@ -2,7 +2,7 @@
 
 > 为了便于阅读，已生成gitbook：https://liaokong.gitbook.io/llm-kai-fa-jiao-cheng/
 
->加了个 [CHANGELOG](CHANGELOG.md),更新了新的内容我会写在这里，方便之前看过的朋友快速查看新的更新内容
+> 加了个 [CHANGELOG](CHANGELOG.md),更新了新的内容我会写在这里，方便之前看过的朋友快速查看新的更新内容
 
 ## 介绍
 
@@ -592,8 +592,8 @@ agent.run('请用中文总结最后一封"******@qq.com"发给我的邮件。并
 
 这只是个小例子，因为 `zapier` 有数以千计的应用，所以我们可以轻松结合 openai api 搭建自己的工作流。
 
-
 ## 小例子们
+
 一些比较大的知识点都已经讲完了，后面的内容都是一些比较有趣的小例子，当作拓展延伸。
 
 ### **执行多个chain**
@@ -735,8 +735,10 @@ inputs = {
 response = chain(inputs)
 print(response['output'])
 ```
+
 我们可以看到，他很好的将格式化后的结果输出了出来
-![image-20230510234934.png](doc/image-20230510234934.png)
+
+<figure><img src="doc/image-20230510234934.png" alt=""><figcaption></figcaption></figure>
 
 ### **自定义agent中所使用的工具**
 
