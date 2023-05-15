@@ -25,7 +25,7 @@ LangChain 是一个用于开发由语言模型驱动的应用程序的框架。�
 
 LLM 调用
 
-* 支持多种模型接口，比如 OpenAI、HuggingFace、AzureOpenAI ...
+* 支持多种模型接口，比如 OpenAI、Hugging Face、AzureOpenAI ...
 * Fake LLM，用于测试
 * 缓存的支持，比如 in-mem（内存）、SQLite、Redis、SQL
 * 用量记录
@@ -807,16 +807,16 @@ ai_response = chat(history.messages)
 print(ai_response)
 ```
 
-### **使用 HuggingFace 模型**
+### **使用 Hugging Face 模型**
 
-使用 HuggingFace 模型之前，需要先设置环境变量
+使用 Hugging Face 模型之前，需要先设置环境变量
 
 ```python
 import os
 os.environ['HUGGINGFACEHUB_API_TOKEN'] = ''
 ```
 
-使用在线的 HuggingFace 模型
+使用在线的 Hugging Face 模型
 
 ```python
 from langchain import PromptTemplate, HuggingFaceHub, LLMChain
@@ -832,7 +832,7 @@ question = "What NFL team won the Super Bowl in the year Justin Beiber was born?
 print(llm_chain.run(question))
 ```
 
-将 HuggingFace 模型直接拉到本地使用
+将 Hugging Face 模型直接拉到本地使用
 
 ```python
 from langchain.llms import HuggingFacePipeline
@@ -862,7 +862,7 @@ print(llm_chain.run(question))
 
 * 训练模型
 * 可以使用本地的 GPU
-* 有些模型无法在 HuggingFace 运行
+* 有些模型无法在 Hugging Face 运行
 
 ### **通过自然语言执行SQL命令**
 
