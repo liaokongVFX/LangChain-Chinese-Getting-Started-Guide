@@ -1,6 +1,8 @@
 # LangChain 中文入门教程
 
-> 为了便于阅读，已生成gitbook：https://liaokong.gitbook.io/llm-kai-fa-jiao-cheng/
+> 为了便于阅读，已生成gitbook：[https://liaokong.gitbook.io/llm-kai-fa-jiao-cheng/](https://liaokong.gitbook.io/llm-kai-fa-jiao-cheng/)
+>
+> github地址：[https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide](https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide)
 
 > 加了个 [CHANGELOG](CHANGELOG.md),更新了新的内容我会写在这里，方便之前看过的朋友快速查看新的更新内容
 
