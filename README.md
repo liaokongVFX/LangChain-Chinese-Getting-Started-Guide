@@ -9,6 +9,10 @@
 > 如果想把 OPENAI API 的请求根路由修改成自己的代理地址，可以通过设置环境变量 “OPENAI\_API\_BASE” 来进行修改。
 >
 > 相关参考代码：[https://github.com/openai/openai-python/blob/d6fa3bfaae69d639b0dd2e9251b375d7070bbef1/openai/\_\_init\_\_.py#L48](https://github.com/openai/openai-python/blob/d6fa3bfaae69d639b0dd2e9251b375d7070bbef1/openai/\_\_init\_\_.py#L48)
+>
+> 在初始化OpenAI相关模型对象时，传入“openai\_api\_base” 变量。
+>
+> 相关参考代码：[https://github.com/hwchase17/langchain/blob/master/langchain/llms/openai.py#L148](https://github.com/hwchase17/langchain/blob/master/langchain/llms/openai.py#L148)
 
 ## 介绍
 
