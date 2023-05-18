@@ -10,7 +10,7 @@
 >
 > 相关参考代码：[https://github.com/openai/openai-python/blob/d6fa3bfaae69d639b0dd2e9251b375d7070bbef1/openai/\_\_init\_\_.py#L48](https://github.com/openai/openai-python/blob/d6fa3bfaae69d639b0dd2e9251b375d7070bbef1/openai/\_\_init\_\_.py#L48)
 >
-> 在初始化OpenAI相关模型对象时，传入“openai\_api\_base” 变量。
+> 或在初始化OpenAI相关模型对象时，传入“openai\_api\_base” 变量。
 >
 > 相关参考代码：[https://github.com/hwchase17/langchain/blob/master/langchain/llms/openai.py#L148](https://github.com/hwchase17/langchain/blob/master/langchain/llms/openai.py#L148)
 
