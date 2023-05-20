@@ -397,9 +397,9 @@ Dimensions：OpenAI 的 text-embedding-ada-002 模型为 OUTPUT DIMENSIONS 为 1
 
 Metric：可以默认为 cosine
 
-Pod Type：想好就用 S1，想快就用 P1
+选择starter plan
 
-![image-20230405184646314](doc/image-20230405184646314.png)
+![image-20230405184646314](doc/starter-plan.png)
 
 持久化数据和加载数据代码如下
 
@@ -477,7 +477,7 @@ from langchain.prompts.chat import (
 )
 
 # 加载 youtube 频道
-loader = YoutubeLoader.from_youtube_channel('https://www.youtube.com/watch?v=Dj60HHy-Kqk')
+loader = YoutubeLoader.from_youtube_url('https://www.youtube.com/watch?v=Dj60HHy-Kqk')
 # 将数据转成 document
 documents = loader.load()
 
@@ -518,7 +518,7 @@ prompt = ChatPromptTemplate.from_messages(messages)
 
 
 # 初始化问答链
-qa = ConversationalRetrievalChain.from_llm(ChatOpenAI(temperature=0.1,max_tokens=2048),retriever,qa_prompt=prompt)
+qa = ConversationalRetrievalChain.from_llm(ChatOpenAI(temperature=0.1,max_tokens=2048),retriever,condense_question_prompt=prompt)
 
 
 chat_history = []
