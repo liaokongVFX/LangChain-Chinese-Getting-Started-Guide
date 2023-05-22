@@ -12,11 +12,15 @@
 >
 > 或在初始化OpenAI相关模型对象时，传入“openai\_api\_base” 变量。
 >
-> 相关参考代码：[https://github.com/hwchase17/langchain/blob/master/langchain/llms/openai.py#L148](https://github.com/hwchase17/langchain/blob/master/langchain/llms/openai.py#L148)
+> 相关代码参考[这里](https://github.com/hwchase17/langchain/blob/master/langchain/llms/openai.py#L148)
+> 
+> <span style="color: rgb(255, 102, 0);">上面的 2 个变量名称是没有错误的，一个大写一个小写，请务必注意</span>
 
 ## 介绍
 
-众所周知 OpenAI 的 API 无法联网的，所以如果只使用自己的功能实现联网搜索并给出回答、总结 PDF 文档、基于某个 Youtube 视频进行问答等等的功能肯定是无法实现的。所以，我们来介绍一个非常强大的第三方开源库：`LangChain` 。
+众所周知 OpenAI 的 API 无法联网的（2023 年 5 月份已经推出了插件服务，这里指的是早于这个时间），所以如果只使用自己的功能实现联网搜索并给出回答、总结 PDF 文档、基于某个 Youtube 视频进行问答等等的功能肯定是无法实现的。
+
+所以，我们来介绍一个非常强大的第三方开源库：`LangChain` 。
 
 > 文档地址：https://python.langchain.com/en/latest/
 
