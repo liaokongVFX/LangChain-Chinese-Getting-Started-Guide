@@ -366,11 +366,11 @@ chroma 是个本地的向量数据库，他提供的一个 `persist_directory` �
 from langchain.vectorstores import Chroma
 
 # 持久化数据
-docsearch = Chroma.from_documents(documents, embeddings, persist_directory="D:/vector_store")
+docsearch = Chroma.from_documents(documents, embeddings, persist_directory = "D:/vector_store")
 docsearch.persist()
 
 # 加载数据
-docsearch = Chroma(persist_directory="D:/vector_store", embedding_function=embeddings)
+docsearch = Chroma(persist_directory="D:/vector_store", embedding_function = embeddings)
 
 ```
 
@@ -413,33 +413,33 @@ import pinecone
 
 # 初始化 pinecone
 pinecone.init(
-  api_key="你的API Key",
-  environment="你的Environment"
+    api_key = "你的API Key",
+    environment = "你的Environment"
 )
 
-loader = DirectoryLoader('/content/sample_data/data/', glob='**/*.txt')
+loader = DirectoryLoader('/content/sample_data/data/', glob = '**/*.txt')
 # 将数据转成 document 对象，每个文件会作为一个 document
 documents = loader.load()
 
 # 初始化加载器
-text_splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=0)
+text_splitter = CharacterTextSplitter(chunk_size = 500, chunk_overlap = 0)
 # 切割加载的 document
 split_docs = text_splitter.split_documents(documents)
 
-index_name="liaokong-test"
+index_name = "liaokong-test"
 
 # 持久化数据
-docsearch = Pinecone.from_texts([t.page_content for t in split_docs], embeddings, index_name=index_name)
+docsearch = Pinecone.from_texts([t.page_content for t in split_docs], embeddings, index_name = index_name)
 
 # 加载数据
 docsearch = Pinecone.from_existing_index(index_name,embeddings)
 
 query = "科大讯飞今年第一季度收入是多少？"
-docs = docsearch.similarity_search(query, include_metadata=True)
+docs = docsearch.similarity_search(query, include_metadata = True)
 
-llm = OpenAI(temperature=0)
-chain = load_qa_chain(llm, chain_type="stuff", verbose=True)
-chain.run(input_documents=docs, question=query)
+llm = OpenAI(temperature = 0)
+chain = load_qa_chain(llm, chain_type = "stuff", verbose = True)
+chain.run(input_documents = docs, question = query)
 ```
 
 ![image-20230407001803057](doc/image-20230407001803057.png)
@@ -459,9 +459,9 @@ from langchain.chains import ChatVectorDBChain, ConversationalRetrievalChain
 
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts.chat import (
-  ChatPromptTemplate,
-  SystemMessagePromptTemplate,
-  HumanMessagePromptTemplate
+    ChatPromptTemplate,
+    SystemMessagePromptTemplate,
+    HumanMessagePromptTemplate
 )
 
 # 加载 youtube 频道
@@ -471,8 +471,8 @@ documents = loader.load()
 
 # 初始化文本分割器
 text_splitter = RecursiveCharacterTextSplitter(
-  chunk_size = 1000,
-  chunk_overlap = 20
+    chunk_size = 1000,
+    chunk_overlap = 20
 )
 
 # 分割 youtube documents
@@ -497,8 +497,8 @@ If you don't know the answer, say you don't, don't try to make it up. And answer
 
 # 构建初始 messages 列表，这里可以理解为是 openai 传入的 messages 参数
 messages = [
-  SystemMessagePromptTemplate.from_template(system_template),
-  HumanMessagePromptTemplate.from_template('{question}')
+    SystemMessagePromptTemplate.from_template(system_template),
+    HumanMessagePromptTemplate.from_template('{question}')
 ]
 
 # 初始化 prompt 对象
@@ -506,16 +506,16 @@ prompt = ChatPromptTemplate.from_messages(messages)
 
 
 # 初始化问答链
-qa = ConversationalRetrievalChain.from_llm(ChatOpenAI(temperature=0.1,max_tokens=2048),retriever,condense_question_prompt=prompt)
+qa = ConversationalRetrievalChain.from_llm(ChatOpenAI(temperature = 0.1,max_tokens = 2048),retriever,condense_question_prompt = prompt)
 
 
 chat_history = []
 while True:
-  question = input('问题：')
-  # 开始发送问题 chat_history 为必须参数,用于存储对话历史
-  result = qa({'question': question, 'chat_history': chat_history})
-  chat_history.append((question, result['answer']))
-  print(result['answer'])
+    question = input('问题：')
+    # 开始发送问题 chat_history 为必须参数,用于存储对话历史
+    result = qa({'question': question, 'chat_history': chat_history})
+    chat_history.append((question, result['answer']))
+    print(result['answer'])
 ```
 
 我们可以看到它能很准确的围绕这个油管视频进行问答
@@ -528,7 +528,7 @@ while True:
 from langchain.callbacks.base import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
-chat = ChatOpenAI(streaming=True, callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]), verbose=True, temperature=0)
+chat = ChatOpenAI(streaming = True, callback_manager = CallbackManager([StreamingStdOutCallbackHandler()]), verbose = True, temperature = 0)
 resp = chat(chat_prompt_with_values.to_messages())
 ```
 
@@ -565,13 +565,13 @@ from langchain.utilities.zapier import ZapierNLAWrapper
 llm = OpenAI(temperature=.3)
 zapier = ZapierNLAWrapper()
 toolkit = ZapierToolkit.from_zapier_nla_wrapper(zapier)
-agent = initialize_agent(toolkit.get_tools(), llm, agent="zero-shot-react-description", verbose=True)
+agent = initialize_agent(toolkit.get_tools(), llm, agent = "zero-shot-react-description", verbose = True)
 
 # 我们可以通过打印的方式看到我们都在 Zapier 里面配置了哪些可以用的工具
 for tool in toolkit.get_tools():
-  print (tool.name)
-  print (tool.description)
-  print ("\n\n")
+    print (tool.name)
+    print (tool.description)
+    print ("\n\n")
 
 agent.run('请用中文总结最后一封"******@qq.com"发给我的邮件。并将总结发送给"******@qq.com"')
 ```
@@ -605,15 +605,15 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import SimpleSequentialChain
 
 # location 链
-llm = OpenAI(temperature=1)
+llm = OpenAI(temperature = 1)
 template = """Your job is to come up with a classic dish from the area that the users suggests.
 % USER LOCATION
 {user_location}
 
 YOUR RESPONSE:
 """
-prompt_template = PromptTemplate(input_variables=["user_location"], template=template)
-location_chain = LLMChain(llm=llm, prompt=prompt_template)
+prompt_template = PromptTemplate(input_variables = ["user_location"], template = template)
+location_chain = LLMChain(llm = llm, prompt = prompt_template)
 
 # meal 链
 template = """Given a meal, give a short and simple recipe on how to make that dish at home.
@@ -622,11 +622,11 @@ template = """Given a meal, give a short and simple recipe on how to make that d
 
 YOUR RESPONSE:
 """
-prompt_template = PromptTemplate(input_variables=["user_meal"], template=template)
-meal_chain = LLMChain(llm=llm, prompt=prompt_template)
+prompt_template = PromptTemplate(input_variables = ["user_meal"], template = template)
+meal_chain = LLMChain(llm = llm, prompt = prompt_template)
 
 # 通过 SimpleSequentialChain 串联起来，第一个答案会被替换第二个中的 user_meal，然后再进行询问
-overall_chain = SimpleSequentialChain(chains=[location_chain, meal_chain], verbose=True)
+overall_chain = SimpleSequentialChain(chains = [location_chain, meal_chain], verbose = True)
 review = overall_chain.run("Rome")
 ```
 
@@ -641,12 +641,12 @@ from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from langchain.prompts import PromptTemplate
 from langchain.llms import OpenAI
 
-llm = OpenAI(model_name="text-davinci-003")
+llm = OpenAI(model_name = "text-davinci-003")
 
 # 告诉他我们生成的内容需要哪些字段，每个字段的类型
 response_schemas = [
-    ResponseSchema(name="bad_string", description="This a poorly formatted user input string"),
-    ResponseSchema(name="good_string", description="This is your response, a reformatted response")
+    ResponseSchema(name = "bad_string", description = "This a poorly formatted user input string"),
+    ResponseSchema(name = "good_string", description = "This is your response, a reformatted response")
 ]
 
 # 初始化解析器
@@ -673,12 +673,12 @@ YOUR RESPONSE:
 
 # 将我们的格式描述嵌入到 prompt 中去，告诉 llm 我们需要它输出什么样格式的内容
 prompt = PromptTemplate(
-    input_variables=["user_input"],
-    partial_variables={"format_instructions": format_instructions},
-    template=template
+    input_variables = ["user_input"],
+    partial_variables = {"format_instructions": format_instructions},
+    template = template
 )
 
-promptValue = prompt.format(user_input="welcom to califonya!")
+promptValue = prompt.format(user_input = "welcom to califonya!")
 llm_output = llm(promptValue)
 
 # 使用解析器进行解析生成的内容
@@ -700,7 +700,7 @@ from langchain.prompts import PromptTemplate
 from langchain.llms import OpenAI
 from langchain.chains import LLMRequestsChain, LLMChain
 
-llm = OpenAI(model_name="gpt-3.5-turbo", temperature=0)
+llm = OpenAI(model_name = "gpt-3.5-turbo", temperature = 0)
 
 template = """在 >>> 和 <<< 之间是网页的返回的HTML内容。
 网页是新浪财经A股上市公司的公司简介。
@@ -721,11 +721,11 @@ template = """在 >>> 和 <<< 之间是网页的返回的HTML内容。
 Extracted:"""
 
 prompt = PromptTemplate(
-    input_variables=["requests_result"],
-    template=template
+    input_variables = ["requests_result"],
+    template = template
 )
 
-chain = LLMRequestsChain(llm_chain=LLMChain(llm=llm, prompt=prompt))
+chain = LLMRequestsChain(llm_chain=LLMChain(llm = llm, prompt = prompt))
 inputs = {
   "url": "https://vip.stock.finance.sina.com.cn/corp/go.php/vCI_CorpInfo/stockid/600519.phtml"
 }
@@ -747,28 +747,28 @@ from langchain.tools import BaseTool
 from langchain.llms import OpenAI
 from langchain import LLMMathChain, SerpAPIWrapper
 
-llm = OpenAI(temperature=0)
+llm = OpenAI(temperature = 0)
 
 # 初始化搜索链和计算链
 search = SerpAPIWrapper()
-llm_math_chain = LLMMathChain(llm=llm, verbose=True)
+llm_math_chain = LLMMathChain(llm = llm, verbose = True)
 
 # 创建一个功能列表，指明这个 agent 里面都有哪些可用工具，agent 执行过程可以看必知概念里的 Agent 那张图
 tools = [
     Tool(
         name = "Search",
-        func=search.run,
-        description="useful for when you need to answer questions about current events"
+        func = search.run,
+        description = "useful for when you need to answer questions about current events"
     ),
     Tool(
-        name="Calculator",
-        func=llm_math_chain.run,
-        description="useful for when you need to answer questions about math"
+        name = "Calculator",
+        func = llm_math_chain.run,
+        description = "useful for when you need to answer questions about math"
     )
 ]
 
 # 初始化 agent
-agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
+agent = initialize_agent(tools, llm, agent = AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose = True)
 
 # 执行 agent
 agent.run("Who is Leo DiCaprio's girlfriend? What is her current age raised to the 0.43 power?")
@@ -791,7 +791,7 @@ agent.run("Who is Leo DiCaprio's girlfriend? What is her current age raised to t
 from langchain.memory import ChatMessageHistory
 from langchain.chat_models import ChatOpenAI
 
-chat = ChatOpenAI(temperature=0)
+chat = ChatOpenAI(temperature = 0)
 
 # 初始化 MessageHistory 对象
 history = ChatMessageHistory()
@@ -822,9 +822,9 @@ from langchain import PromptTemplate, HuggingFaceHub, LLMChain
 template = """Question: {question}
 Answer: Let's think step by step."""
 
-prompt = PromptTemplate(template=template, input_variables=["question"])
-llm = HuggingFaceHub(repo_id="google/flan-t5-xl", model_kwargs={"temperature":0, "max_length":64})
-llm_chain = LLMChain(prompt=prompt, llm=llm)
+prompt = PromptTemplate(template = template, input_variables = ["question"])
+llm = HuggingFaceHub(repo_id = "google/flan-t5-xl", model_kwargs = {"temperature":0, "max_length":64})
+llm_chain = LLMChain(prompt = prompt, llm = llm)
 
 question = "What NFL team won the Super Bowl in the year Justin Beiber was born?"
 print(llm_chain.run(question))
@@ -838,20 +838,20 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, AutoMode
 
 model_id = 'google/flan-t5-large'
 tokenizer = AutoTokenizer.from_pretrained(model_id)
-model = AutoModelForSeq2SeqLM.from_pretrained(model_id, load_in_8bit=True)
+model = AutoModelForSeq2SeqLM.from_pretrained(model_id, load_in_8bit = True)
 
 pipe = pipeline(
     "text2text-generation",
-    model=model, 
-    tokenizer=tokenizer, 
-    max_length=100
+    model = model, 
+    tokenizer = tokenizer, 
+    max_length = 100
 )
 
-local_llm = HuggingFacePipeline(pipeline=pipe)
+local_llm = HuggingFacePipeline(pipeline = pipe)
 print(local_llm('What is the capital of France? '))
 
 
-llm_chain = LLMChain(prompt=prompt,  llm=local_llm)
+llm_chain = LLMChain(prompt = prompt,  llm = local_llm)
 question = "What is the capital of England?"
 print(llm_chain.run(question))
 ```
@@ -873,12 +873,12 @@ from langchain.sql_database import SQLDatabase
 from langchain.llms.openai import OpenAI
 
 db = SQLDatabase.from_uri("sqlite:///../notebooks/Chinook.db")
-toolkit = SQLDatabaseToolkit(db=db)
+toolkit = SQLDatabaseToolkit(db = db)
 
 agent_executor = create_sql_agent(
-    llm=OpenAI(temperature=0),
-    toolkit=toolkit,
-    verbose=True
+    llm = OpenAI(temperature = 0),
+    toolkit = toolkit,
+    verbose = True
 )
 
 agent_executor.run("Describe the playlisttrack table")
@@ -888,9 +888,9 @@ agent_executor.run("Describe the playlisttrack table")
 from langchain import OpenAI, SQLDatabase, SQLDatabaseChain
 
 db = SQLDatabase.from_uri("mysql+pymysql://root:root@127.0.0.1/chinook")
-llm = OpenAI(temperature=0)
+llm = OpenAI(temperature = 0)
 
-db_chain = SQLDatabaseChain(llm=llm, database=db, verbose=True)
+db_chain = SQLDatabaseChain(llm = llm, database = db, verbose = True)
 db_chain.run("How many employees are there?")
 ```
 
