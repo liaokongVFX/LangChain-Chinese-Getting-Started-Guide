@@ -92,7 +92,6 @@ Chains
 
 比如我们将一份 300 页的 PDF 文档发给 OpenAI api，让他进行总结，他肯定会报`超过最大 Token` 的错误。所以这里就需要使用文本分割器去分割我们加载(load)进来的 Document。
 
-
 ### Vectorstores 向量数据库
 
 因为数据相关性搜索其实是向量运算。
@@ -125,33 +124,27 @@ Chains
 
 它相比 fine-tuning 最大的优势就是，不用进行训练，并且可以实时添加新的内容，而不用加一次新的内容就训练一次，并且各方面成本要比 fine-tuning 低很多。
 
-具体比较和选择可以参考这个[视频](https://www.youtube.com/watch?v=9qq6HTr7Ocw)
+具体比较和选择可以参考这个[视频](https://www.youtube.com/watch?v=9qq6HTr7Ocw)。
 
 ## 实战
 
-通过上面的必备概念大家应该已经可以对 LangChain 有了一定的了解，但是可能还有有些懵。
+通过上面的必备概念大家应该已经可以对 LangChain 有了一定的了解，我们现在给大家一些实际的项目功能操作，我相信看完后面的实战，你们就会彻底的理解上面的内容，并且能感受到这个库的真正强大之处。
 
-这都是小问题，我相信看完后面的实战，你们就会彻底的理解上面的内容，并且能感受到这个库的真正强大之处。
+后面的范例使用的 LLM 都是以Open AI 为例，大家也可以根据自己任务的需要换成自己需要的 LLM 模型。
 
-因为我们 OpenAI API 进阶，所以我们后面的范例使用的 LLM 都是以Open AI 为例，后面大家可以根据自己任务的需要换成自己需要的 LLM 模型即可。
-
-当然，在这篇文章的末尾，全部的全部代码都会被保存为一个 colab 的 ipynb 文件提供给大家来学习。
+当然，在这篇文章的末尾，全部的全部代码都会被保存为一个 GoogleColab 的 `ipynb` 文件提供给大家来学习。
 
 > 建议大家按顺序去看每个例子，因为下一个例子会用到上一个例子里面的知识点。
->
-> 当然，如果有看不懂的也不用担心，可以继续往后看，第一次学习讲究的是不求甚解。
-
-###
 
 ### 完成一次问答
 
 第一个案例，我们就来个最简单的，用 LangChain 加载 OpenAI 的模型，并且完成一次问答。
 
-在开始之前，我们需要先设置我们的 openai 的 key，这个 key 可以在用户管理里面创建，这里就不细说了。
+在开始之前，我们需要先设置我们的 OpenAI 的 `key`，这个 `key` 可以在用户管理里面创建，这里就不细说了。
 
 ```python
 import os
-os.environ["OPENAI_API_KEY"] = '你的api key'
+os.environ["OPENAI_API_KEY"] = '你的API Key'
 ```
 
 然后，我们进行导入和执行
@@ -169,13 +162,13 @@ llm("怎么评价人工智能")
 
 ### 通过 Google 搜索并返回答案
 
-接下来，我们就来搞点有意思的。我们来让我们的 OpenAI api 联网搜索，并返回答案给我们。
+接下来，我们来让我们的 OpenAI API 联网搜索，并返回答案给我们。
 
-这里我们需要借助 Serpapi 来进行实现，Serpapi 提供了 google 搜索的 api 接口。
+这里我们需要借助 SerpApi 来进行实现，SerpApi 提供了 Google 搜索的 API 接口。
 
-首先需要我们到 Serpapi 官网上注册一个用户，https://serpapi.com/ 并复制他给我们生成 api key。
+首先需要我们到 [SerpApi 官网](https://serpapi.com/)上注册一个用户，并复制他给我们生成 Api Key。
 
-然后我们需要像上面的 openai api key 一样设置到环境变量里面去。
+然后我们需要像上面的 OpenAI API Key 一样设置到环境变量里面去。
 
 ```python
 import os
@@ -194,14 +187,14 @@ from langchain.agents import AgentType
 # 加载 OpenAI 模型
 llm = OpenAI(temperature=0,max_tokens=2048) 
 
- # 加载 serpapi 工具
+# 加载 SerpApi 工具
 tools = load_tools(["serpapi"])
 
 # 如果搜索完想在计算一下可以这么写
 # tools = load_tools(['serpapi', 'llm-math'], llm=llm)
 
-# 如果搜索完想再让他再用python的print做点简单的计算，可以这样写
-# tools=load_tools(["serpapi","python_repl"])
+# 如果搜索完想再让他再用 Python 的 print 做点简单的计算，可以这样写
+# tools = load_tools(["serpapi","python_repl"])
 
 # 工具加载后都需要初始化，verbose 参数为 True，会打印全部的执行详情
 agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
@@ -212,11 +205,11 @@ agent.run("What's the date today? What great events have taken place today in hi
 
 ![image-20230404234236982](doc/image-20230404234236982.png)
 
-我们可以看到，他正确的返回了日期（有时差），并且返回了历史上的今天。
+我们可以看到，它正确的返回了日期（有时差），并且返回了历史上的今天。
 
-在 chain 和 agent 对象上都会有 `verbose` 这个参数，这个是个非常有用的参数，开启他后我们可以看到完整的 chain 执行过程。
+在 Chain 和 Agent 对象上都会有 `verbose` 这个参数，这个是个非常有用的参数，开启后我们可以看到完整的 Chain 执行过程。
 
-可以在上面返回的结果看到，他将我们的问题拆分成了几个步骤，然后一步一步得到最终的答案。
+可以在上面返回的结果看到，它将我们的问题拆分成了几个步骤，然后一步一步得到最终的答案。
 
 关于agent type 几个选项的含义（理解不了也不会影响下面的学习，用多了自然理解了）：
 
