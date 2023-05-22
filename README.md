@@ -211,40 +211,35 @@ agent.run("What's the date today? What great events have taken place today in hi
 
 可以在上面返回的结果看到，它将我们的问题拆分成了几个步骤，然后一步一步得到最终的答案。
 
-关于agent type 几个选项的含义（理解不了也不会影响下面的学习，用多了自然理解了）：
+关于 Agent Type 几个选项的含义（理解不了也不会影响下面的学习，用多了自然理解了）：
 
 * zero-shot-react-description: 根据工具的描述和请求内容的来决定使用哪个工具（最常用）
-* react-docstore: 使用 ReAct 框架和 docstore 交互, 使用`Search` 和`Lookup` 工具, 前者用来搜, 后者寻找term, 举例: `Wipipedia` 工具
-* self-ask-with-search 此代理只使用一个工具: Intermediate Answer, 它会为问题寻找事实答案(指的非 gpt 生成的答案, 而是在网络中,文本中已存在的), 如 `Google search API` 工具
-* conversational-react-description: 为会话设置而设计的代理, 它的prompt会被设计的具有会话性, 且还是会使用 ReAct 框架来决定使用来个工具, 并且将过往的会话交互存入内存
+* react-docstore: 使用 ReAct 框架和 docstore 交互, 使用 `Search` 和`Lookup` 工具, 前者用来搜, 后者寻找 term, 举例: `Wipipedia` 工具
+* self-ask-with-search 此代理只使用一个工具: `Intermediate Answer`, 它会为问题寻找事实答案(指的非 GPT 生成的答案, 而是在网络中,文本中已存在的), 如 `Google search API` 工具
+* conversational-react-description: 为会话设置而设计的代理, 它的 prompt 会被设计的具有会话性, 且还是会使用 ReAct 框架来决定使用哪个工具, 并且将过往的会话交互存入内存
 
-> reAct 介绍可以看这个：https://arxiv.org/pdf/2210.03629.pdf
+> reAct 介绍可以看[这个](https://arxiv.org/pdf/2210.03629.pdf)
 >
-> LLM 的 ReAct 模式的 Python 实现: https://til.simonwillison.net/llms/python-react-pattern
+> LLM 的 ReAct 模式的 Python 实现可以看[这里](https://til.simonwillison.net/llms/python-react-pattern)
 >
-> agent type 官方解释：
->
-> https://python.langchain.com/en/latest/modules/agents/agents/agent\_types.html?highlight=zero-shot-react-description
+> Agent Type 官方解释可以看[这里](https://python.langchain.com/en/latest/modules/agents/agents/agent\_types.html?highlight=zero-shot-react-description)
+
 
 > 有一点要说明的是，这个 `serpapi` 貌似对中文不是很友好，所以提问的 prompt 建议使用英文。
 
-当然，官方已经写好了 `ChatGPT Plugins` 的 agent，未来 chatgpt 能用啥插件，我们在 api 里面也能用插件，想想都美滋滋。
+当然，官方已经写好了 `ChatGPT Plugins` 的 agent，未来 chatgpt 能用啥插件，我们在 api 里面也能用插件。不过目前只能使用不用授权的插件，期待未来官方解决这个。
 
-不过目前只能使用不用授权的插件，期待未来官方解决这个。
-
-感兴趣的可以看这个文档：https://python.langchain.com/en/latest/modules/agents/tools/examples/chatgpt\_plugins.html
-
-> Chatgpt 只能给官方赚钱，而 Openai API 能给我赚钱
+感兴趣的可以看这个[文档](https://python.langchain.com/en/latest/modules/agents/tools/examples/chatgpt\_plugins.html)
 
 ### 对超长文本进行总结
 
-假如我们想要用 openai api 对一个段文本进行总结，我们通常的做法就是直接发给 api 让他总结。但是如果文本超过了 api 最大的 token 限制就会报错。
+假如我们想要用 OpenAI API 对一个段文本进行总结，我们通常的做法就是直接发给 API 让它总结。但是如果文本超过了 API 最大的 token 限制就会报错。
 
-这时，我们一般会进行对文章进行分段，比如通过 tiktoken 计算并分割，然后将各段发送给 api 进行总结，最后将各段的总结再进行一个全部的总结。
+这时，我们一般会进行对文章进行分段，比如通过 `tiktoken` 计算并分割，然后将各段发送给 API 进行总结，最后将各段的总结再进行一个全部的总结。
 
 如果，你用是 LangChain，他很好的帮我们处理了这个过程，使得我们编写代码变的非常简单。
 
-废话不多说，直接上代码。
+如下就是实现上面过程的代码：
 
 ```python
 from langchain.document_loaders import UnstructuredFileLoader
