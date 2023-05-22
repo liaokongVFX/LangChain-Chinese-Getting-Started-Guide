@@ -20,11 +20,9 @@
 
 众所周知 OpenAI 的 API 无法联网的（2023 年 5 月份已经推出了插件服务，这里指的是早于这个时间），所以如果只使用自己的功能实现联网搜索并给出回答、总结 PDF 文档、基于某个 Youtube 视频进行问答等等的功能肯定是无法实现的。
 
-所以，我们来介绍一个非常强大的第三方开源库：`LangChain` 。
+所以，我们来介绍一个非常强大的第三方开源库：`LangChain` ，项目地址在[这里](https://github.com/hwchase17/langchain)，文档地址在[这里](https://python.langchain.com/en/latest/)。
 
-> 文档地址：https://python.langchain.com/en/latest/
-
-这个库目前非常活跃，每天都在迭代，已经有 22k 的 star，更新速度飞快。
+这个库目前非常活跃，每天都在迭代，已经有 ~22k~ 44K 的 star，更新速度飞快。
 
 LangChain 是一个用于开发由语言模型驱动的应用程序的框架。他主要拥有 2 个能力：
 
@@ -33,7 +31,6 @@ LangChain 是一个用于开发由语言模型驱动的应用程序的框架。�
 
 > LLM 模型：Large Language Model，大型语言模型
 
-##
 
 ## 基础功能
 
@@ -58,60 +55,63 @@ Prompt管理，支持各种自定义模板
 Chains
 
 * LLMChain
-* 各种工具Chain
+* 各种工具 Chain
 * LangChainHub
 
 ## 必知概念
 
-相信大家看完上面的介绍多半会一脸懵逼。不要担心，上面的概念其实在刚开始学的时候不是很重要，当我们讲完后面的例子之后，在回来看上面的内容会一下明白很多。
+上面的概念其实在刚开始学的时候不是很重要，当我们讲完后面的例子之后，在回来看上面的内容会一下明白很多。
 
 但是，这里有几个概念是必须知道的。
 
-##
-
 ### Loader 加载器
 
-顾名思义，这个就是从指定源进行加载数据的。比如：文件夹 `DirectoryLoader`、Azure 存储 `AzureBlobStorageContainerLoader`、CSV文件 `CSVLoader`、印象笔记 `EverNoteLoader`、Google网盘 `GoogleDriveLoader`、任意的网页 `UnstructuredHTMLLoader`、PDF `PyPDFLoader`、S3 `S3DirectoryLoader`/`S3FileLoader`、
+顾名思义，这个就是从指定源进行加载数据的。比如：
 
-Youtube `YoutubeLoader` 等等，上面只是简单的进行列举了几个，官方提供了超级的多的加载器供你使用。
+* 文件夹 `DirectoryLoader`、
+* Azure 存储 `AzureBlobStorageContainerLoader`、
+* CSV文件 `CSVLoader`、
+* 印象笔记 `EverNoteLoader`、
+* Google网盘 `GoogleDriveLoader`、
+* 任意的网页 `UnstructuredHTMLLoader`、
+* PDF `PyPDFLoader`、
+* S3 `S3DirectoryLoader`/`S3FileLoader`、
+* Youtube `YoutubeLoader` 
 
-> https://python.langchain.com/en/latest/modules/indexes/document\_loaders.html
-
-###
+等等，上面只是简单的进行列举了几个，官方提供了[超级多的加载器](https://python.langchain.com/en/latest/modules/indexes/document\_loaders.html)供你使用。
 
 ### Document 文档
 
 当使用loader加载器读取到数据源后，数据源需要转换成 Document 对象后，后续才能进行使用。
 
-###
+### Text Splitters 文本分割
 
-### Text Spltters 文本分割
+顾名思义，文本分割就是用来分割文本的。
 
-顾名思义，文本分割就是用来分割文本的。为什么需要分割文本？因为我们每次不管是做把文本当作 prompt 发给 openai api ，还是还是使用 openai api embedding 功能都是有字符限制的。
+为什么需要分割文本？因为我们每次不管是做把文本当作 prompt 发给 OpenAI API，还是还是使用 OpenAI API embedding 功能都是有字符限制的。
 
-比如我们将一份300页的 pdf 发给 openai api，让他进行总结，他肯定会报超过最大 Token 错。所以这里就需要使用文本分割器去分割我们 loader 进来的 Document。
+比如我们将一份 300 页的 PDF 文档发给 OpenAI api，让他进行总结，他肯定会报`超过最大 Token` 的错误。所以这里就需要使用文本分割器去分割我们加载(load)进来的 Document。
 
-###
 
 ### Vectorstores 向量数据库
 
-因为数据相关性搜索其实是向量运算。所以，不管我们是使用 openai api embedding 功能还是直接通过向量数据库直接查询，都需要将我们的加载进来的数据 `Document` 进行向量化，才能进行向量运算搜索。转换成向量也很简单，只需要我们把数据存储到对应的向量数据库中即可完成向量的转换。
+因为数据相关性搜索其实是向量运算。
 
-官方也提供了很多的向量数据库供我们使用。
+所以，不管我们是使用 OpenAI API embedding 功能还是直接通过向量数据库直接查询，都需要将我们的加载进来的数据 `Document` 进行向量化，才能进行向量运算搜索。
 
-> https://python.langchain.com/en/latest/modules/indexes/vectorstores.html
+转换成向量也很简单，只需要我们把数据存储到对应的向量数据库中即可完成向量的转换。
 
-###
+官方也提供了很多的[向量数据库](https://python.langchain.com/en/latest/modules/indexes/vectorstores.html)供我们使用。
 
 ### Chain 链
 
-我们可以把 Chain 理解为任务。一个 Chain 就是一个任务，当然也可以像链条一样，一个一个的执行多个链。
+> 有点像编程语言中的链式操作，可以一直点下去的样子。
 
-###
+我们可以把 Chain 理解为任务。一个 Chain 就是一个任务，当然也可以像链条一样，一个一个的执行多个链。
 
 ### Agent 代理
 
-我们可以简单的理解为他可以动态的帮我们选择和调用chain或者已有的工具。
+我们可以简单的理解为它(Agent)可以动态的帮我们选择和调用 Chain 或者已有的工具。
 
 执行过程可以参考下面这张图:
 
@@ -119,13 +119,13 @@ Youtube `YoutubeLoader` 等等，上面只是简单的进行列举了几个，�
 
 ### Embedding
 
-用于衡量文本的相关性。这个也是 OpenAI API 能实现构建自己知识库的关键所在。
+用于衡量文本的相关性。
 
-他相比 fine-tuning 最大的优势就是，不用进行训练，并且可以实时添加新的内容，而不用加一次新的内容就训练一次，并且各方面成本要比 fine-tuning 低很多。
+这个也是 OpenAI API 能实现构建自己知识库的关键所在。
 
-> 具体比较和选择可以参考这个视频：https://www.youtube.com/watch?v=9qq6HTr7Ocw
+它相比 fine-tuning 最大的优势就是，不用进行训练，并且可以实时添加新的内容，而不用加一次新的内容就训练一次，并且各方面成本要比 fine-tuning 低很多。
 
-##
+具体比较和选择可以参考这个[视频](https://www.youtube.com/watch?v=9qq6HTr7Ocw)
 
 ## 实战
 
