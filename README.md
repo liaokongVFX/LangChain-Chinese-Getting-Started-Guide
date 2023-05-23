@@ -851,7 +851,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, AutoMode
 
 model_id = 'google/flan-t5-large'
 tokenizer = AutoTokenizer.from_pretrained(model_id)
-model = AutoModelForSeq2SeqLM.from_pretrained(model_id)  # load_in_8bit=True,  # , device_map='auto'
+model = AutoModelForSeq2SeqLM.from_pretrained(model_id)
 
 pipe = pipeline(
     "text2text-generation",
