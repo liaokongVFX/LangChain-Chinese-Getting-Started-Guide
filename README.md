@@ -193,7 +193,7 @@ llm = OpenAI(temperature=0,max_tokens=2048)
  # 加载 serpapi 工具
 tools = load_tools(["serpapi"])
 
-# 如果搜索完想在计算一下可以这么写
+# 如果搜索完想再计算一下可以这么写
 # tools = load_tools(['serpapi', 'llm-math'], llm=llm)
 
 # 如果搜索完想再让他再用python的print做点简单的计算，可以这样写
@@ -683,7 +683,7 @@ Reformat it and make sure all the words are spelled correctly
 YOUR RESPONSE:
 """
 
-# 讲我们的格式描述嵌入到 prompt 中去，告诉 llm 我们需要他输出什么样格式的内容
+# 将我们的格式描述嵌入到 prompt 中去，告诉 llm 我们需要他输出什么样格式的内容
 prompt = PromptTemplate(
     input_variables=["user_input"],
     partial_variables={"format_instructions": format_instructions},
