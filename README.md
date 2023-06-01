@@ -71,7 +71,7 @@ Chains
 
 Youtube `YoutubeLoader` 等等，上面只是简单的进行列举了几个，官方提供了超级的多的加载器供你使用。
 
-> https://python.langchain.com/en/latest/modules/indexes/document\_loaders.html
+> https://python.langchain.com/en/latest/modules/indexes/document_loaders.html
 
 ###
 
@@ -227,7 +227,7 @@ agent.run("What's the date today? What great events have taken place today in hi
 >
 > agent type 官方解释：
 >
-> https://python.langchain.com/en/latest/modules/agents/agents/agent\_types.html?highlight=zero-shot-react-description
+> https://python.langchain.com/en/latest/modules/agents/agents/agent_types.html?highlight=zero-shot-react-description
 
 > 有一点要说明的是，这个 `serpapi` 貌似对中文不是很友好，所以提问的 prompt 建议使用英文。
 
@@ -235,7 +235,7 @@ agent.run("What's the date today? What great events have taken place today in hi
 
 不过目前只能使用不用授权的插件，期待未来官方解决这个。
 
-感兴趣的可以看这个文档：https://python.langchain.com/en/latest/modules/agents/tools/examples/chatgpt\_plugins.html
+感兴趣的可以看这个文档：https://python.langchain.com/en/latest/modules/agents/tools/examples/chatgpt_plugins.html
 
 > Chatgpt 只能给官方赚钱，而 Openai API 能给我赚钱
 
@@ -297,7 +297,7 @@ chain.run(split_documents[:5])
 
 不过，这个也不是绝对的，要看所使用的那个文本分割模型内部的具体算法。
 
-> 文本分割器可以参考这个文档：https://python.langchain.com/en/latest/modules/indexes/text\_splitters.html
+> 文本分割器可以参考这个文档：https://python.langchain.com/en/latest/modules/indexes/text_splitters.html
 
 **chain 的 `chain_type` 参数**
 
