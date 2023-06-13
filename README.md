@@ -113,8 +113,10 @@ Youtube `YoutubeLoader` 等等，上面只是简单的进行列举了几个，�
 
 ![image-20230406213322739](doc/image-20230406213322739.png)
 > 从这篇博客可以看看LangChain运作的底层逻辑：
+> 
 > 1>适合小白，有感性的认识
 > [可以看看这篇短文博客《LangChain之Agent是何物？》](https://zhuanlan.zhihu.com/p/634275152)
+> 
 > 2>适合极客，对源码一探究竟
 > 从这篇博客可以看看LangChain运作的底层逻辑：
 > [如果想从源码和打印日志理清楚请看这篇博客《LangChain Agent执行原理分析》（适合挖掘底层逻辑，一探究竟的朋友）](https://cloud.tencent.com/developer/article/2286923)
