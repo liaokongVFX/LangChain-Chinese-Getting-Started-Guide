@@ -4,6 +4,8 @@
 >
 > github地址：[https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide](https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide)
 
+> 因为langchain库一直在飞速更新迭代，但该文档写与4月初，并且我个人精力有限，所以colab里面的代码有可能有些已经过时。如果有运行失败的可以先搜索一下当前文档是否有更新，如文档也没更新欢迎提issue，或者修复后直接提pr，感谢~
+
 > 加了个 [CHANGELOG](CHANGELOG.md),更新了新的内容我会写在这里，方便之前看过的朋友快速查看新的更新内容
 
 > 如果想把 OPENAI API 的请求根路由修改成自己的代理地址，可以通过设置环境变量 “OPENAI\_API\_BASE” 来进行修改。
@@ -928,4 +930,4 @@ db_chain.run("How many employees are there?")
 
 本文章的所有范例代码都在这里，祝大家学习愉快。
 
-https://colab.research.google.com/drive/1ArRVMiS-YkhUlobHrU6BeS8fF57UeaPQ?usp=sharing
+https://colab.research.google.com/drive/1ArRVMiS-YkhUlobHrU6BeS8fF57UeaPQ?usp=sharing 
