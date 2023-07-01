@@ -325,7 +325,7 @@ chain.run(split_documents[:5])
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.text_splitter import CharacterTextSplitter
-from langchain import OpenAI,VectorDBQA
+from langchain import OpenAI
 from langchain.document_loaders import DirectoryLoader
 from langchain.chains import RetrievalQA
 
@@ -345,7 +345,7 @@ embeddings = OpenAIEmbeddings()
 docsearch = Chroma.from_documents(split_docs, embeddings)
 
 # 创建问答对象
-qa = VectorDBQA.from_chain_type(llm=OpenAI(), chain_type="stuff", vectorstore=docsearch,return_source_documents=True)
+qa = RetrievalQA.from_chain_type(llm=OpenAI(), chain_type="stuff", retriever=docsearch.as_retriever(), return_source_documents=True)
 # 进行问答
 result = qa({"query": "科大讯飞今年第一季度收入是多少？"})
 print(result)
