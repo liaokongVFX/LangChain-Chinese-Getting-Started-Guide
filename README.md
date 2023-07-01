@@ -502,7 +502,7 @@ system_template = """
 Use the following context to answer the user's question.
 If you don't know the answer, say you don't, don't try to make it up. And answer in Chinese.
 -----------
-{context}
+{question}
 -----------
 {chat_history}
 """
