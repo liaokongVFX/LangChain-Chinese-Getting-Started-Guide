@@ -73,7 +73,7 @@ Chains
 
 Youtube `YoutubeLoader` 等等，上面只是简单的进行列举了几个，官方提供了超级的多的加载器供你使用。
 
-> https://python.langchain.com/en/latest/modules/indexes/document_loaders.html
+> [document_loaders](https://python.langchain.com/docs/modules/data_connection/document_loaders.html)
 
 ###
 
