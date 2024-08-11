@@ -3,6 +3,7 @@
 > 为了便于阅读，已生成gitbook：[https://liaokong.gitbook.io/llm-kai-fa-jiao-cheng/](https://liaokong.gitbook.io/llm-kai-fa-jiao-cheng/)
 >
 > github地址：[https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide](https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide)
+> 
 > 低价 国内外 ai 模型 api 中转：[https://api.91ai.me](https://api.91ai.me/)
 
 > 因为langchain库一直在飞速更新迭代，但该文档写与4月初，并且我个人精力有限，所以colab里面的代码有可能有些已经过时。如果有运行失败的可以先搜索一下当前文档是否有更新，如文档也没更新欢迎提issue，或者修复后直接提pr，感谢~
