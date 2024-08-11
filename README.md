@@ -4,6 +4,8 @@
 >
 > github地址：[https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide](https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide)
 > 
+> 《LangChain技术解密：构建大模型应用的全景指南》现已出版：[https://item.jd.com/14598210.html](https://item.jd.com/14598210.html)
+> 
 > 低价 国内外 ai 模型 api 中转：[https://api.91ai.me](https://api.91ai.me/)
 
 > 因为langchain库一直在飞速更新迭代，但该文档写与4月初，并且我个人精力有限，所以colab里面的代码有可能有些已经过时。如果有运行失败的可以先搜索一下当前文档是否有更新，如文档也没更新欢迎提issue，或者修复后直接提pr，感谢~
