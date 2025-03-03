@@ -3,6 +3,8 @@
 > 为了便于阅读，已生成gitbook：[https://liaokong.gitbook.io/llm-kai-fa-jiao-cheng/](https://liaokong.gitbook.io/llm-kai-fa-jiao-cheng/)
 >
 > github地址：[https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide](https://github.com/liaokongVFX/LangChain-Chinese-Getting-Started-Guide)
+>
+> 另外一篇[《Model Context Protocol(MCP) 编程极速入门》](https://github.com/liaokongVFX/MCP-Chinese-Getting-Started-Guide)
 > 
 > 《LangChain技术解密：构建大模型应用的全景指南》现已出版：[https://item.jd.com/14598210.html](https://item.jd.com/14598210.html)
 > 
