@@ -79,7 +79,7 @@ Chains
 
 Youtube `YoutubeLoader` 等等，上面只是简单的进行列举了几个，官方提供了超级的多的加载器供你使用。
 
-> https://python.langchain.com/docs/modules/data_connection/document_loaders.html
+> https://python.langchain.com/docs/how_to/#document-loaders
 
 ###
 
@@ -103,7 +103,7 @@ Youtube `YoutubeLoader` 等等，上面只是简单的进行列举了几个，�
 
 官方也提供了很多的向量数据库供我们使用。
 
-> https://python.langchain.com/en/latest/modules/indexes/vectorstores.html
+> https://python.langchain.com/docs/integrations/vectorstores/
 
 ###
 
