@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/liaokongvfx-langchain-chinese-getting-started-guide-badge.png)](https://mseep.ai/app/liaokongvfx-langchain-chinese-getting-started-guide)
+
 # LangChain 中文入门教程
 
 > 为了便于阅读，已生成gitbook：[https://liaokong.gitbook.io/llm-kai-fa-jiao-cheng/](https://liaokong.gitbook.io/llm-kai-fa-jiao-cheng/)
